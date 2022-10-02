@@ -25,7 +25,7 @@ function App() {
 
   const updateFromValue = (value: string) => {
     if (!rates) return;
-    const convertedToValue = parseFloat(value) / rates[toCurrency.code];
+    const convertedToValue = parseFloat(value) * rates[toCurrency.code];
     setValues([value, convertedToValue.toFixed(2)]);
   }
   const updateToValue = (value: string) => {
