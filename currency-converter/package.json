@@ -1,0 +1,31 @@
+{
+  "name": "currency-converter",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/traintocode/sample-projects.git",
+    "directory": "currency-converter"
+  },
+  "license": "GNU GPLv3",
+  "dependencies": {
+    "@ant-design/icons": "^4.7.0",
+    "react": "^18.2.0",
+    "react-currency-input-field": "^3.6.5",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.17",
+    "@types/react-dom": "^18.0.6",
+    "@vitejs/plugin-react": "^2.1.0",
+    "typescript": "^4.6.4",
+    "typescript-plugin-css-modules": "^3.4.0",
+    "vite": "^3.1.0"
+  }
+}

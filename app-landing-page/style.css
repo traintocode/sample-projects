@@ -1,0 +1,123 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;700&display=swap');
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+
+:root {
+    font-size: 14px;
+
+}
+
+
+body {
+    background-color: #3FB543;
+}
+
+.store-badge-a {
+    display: block;
+    flex: 0 1;
+}
+
+.store-badge-a:not(:first-of-type) {
+    padding-left: 10px;
+}
+
+.store-badge-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 4rem;
+
+}
+
+.store-badge-img {
+    height: min(12vw, 50px);
+}
+
+h1, p {
+    color: white;
+}
+
+h1 {
+    font-size: 4rem;
+    text-align: center;
+    margin-top: 4rem;
+    font-family: 'Fira Sans', sans-serif;
+    font-weight: bold;
+}
+
+.subtitle {
+    font-size: 2rem;
+    text-align: center;
+    font-family: 'Fira Sans', sans-serif;
+    margin-top: 1rem;
+}
+
+.screen-image {
+    width: 100%;
+}
+
+.section-container {
+    display: flex;
+    flex-direction: column;
+}
+
+@media only screen and (min-width: 900px) {
+    .section-container {
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        margin: auto;
+        max-width: 1000px;
+    }    
+
+    .section-main {
+        flex: 1 1 50%;
+    }
+    
+    .section-other {
+        flex: 1 1 50%;
+    }
+}
+

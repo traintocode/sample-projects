@@ -1,0 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;700&display=swap');
+
+:root {
+    --background-colour: #ECE2D0;
+    --focus-colour: #4BBE9C;
+    --controls-line-height: 1.5em;
+    --controls-bg-colour: #E1D2B7;
+    --controls-border-colour: #CFB78C;
+    --block-border-colour: transparent;
+    --text-colour: #2D2525;
+
+
+    background-color: var(--background-colour);
+    font-family: 'Fira Sans', sans-serif;
+    height: 100%;
+}
+
+body,#root {
+    height: 100%;
+    margin: 0;
+}
