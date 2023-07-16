@@ -1,5 +1,8 @@
 {
   "manifest_version": 3,
   "name": "My Extension",
-  "version": "1.0.1"
+  "version": "1.0.1",
+   "icons": {
+    "32": "icon32.png"
+  }
 }
