@@ -1,0 +1,109 @@
+//~ 1. Simplest Chrome Extension Possible
+//#file manifest.json
+{}
+//~ Go online and find the schema for this manifest file
+//#chrome https://developer.chrome.com/docs/extensions/mv3/manifest/
+//#file #clear manifest.json
+{
+    "manifest_version": 3,
+    "name": "My Extension",
+    "version": "1.0.1",
+}
+//#save
+//~ Load this into chrome!
+//#chrome chrome://extensions/
+//~ 2. Add an icon - 
+//#chrome https://developer.chrome.com/docs/extensions/mv3/manifest/
+//#copyin C:/TEMP/icon32.png
+//#file manifest.json L5
+"icons": {
+    "32": "icon32.png"
+}
+
+//#save
+//~ Reload in chrome!
+//#chrome chrome://extensions/
+//~ 3. Add a background script
+//#file manifest.json L8
+"background": {
+    "service_worker": "service-worker.js",
+    "type": "module"
+}
+
+//#save
+//#file service-worker.js
+chrome.action.onClicked.addListener(tab => {
+//#P
+    chrome.scripting.executeScript({
+        target: {tabId: tab.id},
+//#P
+        func: () => {
+//#P
+            alert('Hello from my extension!');
+        }
+      });
+  });
+//#save
+//#file manifest.json L12
+"action": { },
+//#P
+"permissions": [
+    "scripting"
+]
+//#save
+//~ Reload in chrome!
+//#chrome chrome://extensions/
+//~ Add a popup
+//#file OVERWRITE service-worker.js
+// chrome.action.onClicked.addListener(tab => {
+//     chrome.scripting.executeScript({
+//         target: {tabId: tab.id},
+//         func: () => {
+//             alert('Hello from my extension!');
+//         }
+//       });
+//   });
+//#save
+//#file index.html
+!
+
+//#moveto 6,12
+//replace "My Chrome Extension" > "Extension Title"
+//#moveto 9
+<h1>Hello!</h1>
+
+//#save
+//#file manifest.json L12
+//#linedelete
+"action": {
+    "default_popup": "index.html"
+},
+
+//#save
+//~ Reload in chrome!
+//#chrome chrome://extensions/
+//~ 4. Adding a Script into the index.html
+//file index.html L12
+<button id="myButton">Click Me</button>
+//#P
+<script src="index.js"></script>
+//#save
+//#file index.js
+async function sayHello() {
+//#P    
+    let [tab] = await chrome.tabs.query({ active: true });
+//#P
+    chrome.scripting.executeScript({
+//#P        
+        target: { tabId: tab.id },
+        func: () => {
+//#P            
+            alert('Hello from my extension!');
+        }
+    });
+}
+//#P
+document.getElementById("myButton").addEventListener("click", sayHello);
+//#save
+//~ Reload in chrome!
+//#chrome chrome://extensions/
