@@ -1,0 +1,77 @@
+//~ The first thing we are going to do is create a manifest file in this public folder here.
+//#newfile public/manifest.json
+{
+    "manifest_version": 3,
+    "version": "1.0.0",
+    "name": "My Vite Extension",
+}
+//~ Notice how we can npm run build and this appears in the dist folder
+//#file L5 public/manifest.json
+    "action": {
+        "default_popup": "index.html"
+    },
+//- We also need to add the permissions to run a script
+    "permissions": [
+        "scripting"
+    ],
+//- And the permissions to access a page at any url
+    "host_permissions": [
+        "http://*/*",
+        "https://*/*"
+    ],
+//- And let's put our icon back in too
+    "icons": {
+        "32": "icon32.png"
+    }
+//#save
+//~ We can copy the icon png into the public folder
+//#copyin C:/TEMP/icon32.png
+//~ MOVE it to the public folder!!!
+//~ npm run build now we can load it in Chrome!!
+//~ Show the index.html and show main.tsx => App.tsx
+//#file src/App.tsx
+//#replace 19,11 "Vite + React" > "My Extension"
+//~ Then we can get rid of the counter and make the button run our script in the context of the tab
+//#replace 21,32 "setCount((count) => count + 1)" > "onclick()"
+//~ Change the button text too
+//#replace 22,11 "count is {count}" > "Click Me"
+//#file D7 src/App.tsx
+
+  const onclick = async () => {
+    
+  }
+//~ npm install -D @types/chrome
+//#file D9 src/App.tsx
+        let [tab] = await chrome.tabs.query({ active: true });
+//-
+        chrome.scripting.executeScript({
+            target: { tabId: tab.id! },
+//-
+            func: () => {
+                alert('Hello from my extension!');
+            }
+        });
+//~ And let's just delete that unused import
+//#file D1 src/App.tsx
+//~ npm run build then load in Chrome!
+//#replace 13,17 "alert('Hello from my extension!');" > "document.body.style.backgroundColor = 'red';"
+//~ npm run build then load in Chrome!
+//#file L7 src/App.tsx
+    const [ colour, setColour ] = useState('');
+//#moveto 1
+import { useState } from 'react';
+//#file L31 src/App.tsx
+        <input type="color" onChange={(e) => setColour(e.currentTarget.value)} value={colour} />
+
+//~ DO SHIFT + ALT + F
+//~ npm run build and test!
+//#replace 14,47 "'red'" > "colour"
+//~ But we can't do that - explain the context
+//#file L13 src/App.tsx
+      args: [colour],
+//~ tell Typescript about this arg
+//#moveto 11,35
+<string[], void>
+//#moveto 14,14
+colour
+//~ Run it!

@@ -1,14 +1,7 @@
 {
     "manifest_version": 3,
-    "name": "My Extension",
-    "version": "1.0.1",
-    "icons": {
-        "32": "icon32.png"
-    },
-    "background": {
-        "service_worker": "service-worker.js",
-        "type": "module"
-    },
+    "version": "1.0.0",
+    "name": "My Vite Extension",
     "action": {
         "default_popup": "index.html"
     },
@@ -18,5 +11,8 @@
     "host_permissions": [
         "http://*/*",
         "https://*/*"
-    ]
+    ],
+    "icons": {
+        "32": "icon32.png"
+    }
 }

@@ -1,109 +1,108 @@
-//~ 1. Simplest Chrome Extension Possible
-//#file manifest.json
-{}
+//~ STEP 1... Simplest Chrome Extension Possible
+//#newfile manifest.json
+{
+}
+//~
+//#save
 //~ Go online and find the schema for this manifest file
 //#chrome https://developer.chrome.com/docs/extensions/mv3/manifest/
-//#file #clear manifest.json
+//#file manifest.json
+//#clearfile
 {
     "manifest_version": 3,
     "name": "My Extension",
-    "version": "1.0.1",
+    "version": "1.0.0"
 }
 //#save
-//~ Load this into chrome!
-//#chrome chrome://extensions/
-//~ 2. Add an icon - 
-//#chrome https://developer.chrome.com/docs/extensions/mv3/manifest/
+//~ Load this into chrome - go to the chrome extensions tab at chrome://extensions/
+//~ STEP 2... Add an icon
+//~#chrome https://developer.chrome.com/docs/extensions/mv3/manifest/
 //#copyin C:/TEMP/icon32.png
-//#file manifest.json L5
-"icons": {
-    "32": "icon32.png"
-}
-
+//~ Add this into the manifest json
+//#file L4 manifest.json
+    "icons": {
+        "32": "icon32.png"
+    },
 //#save
 //~ Reload in chrome!
-//#chrome chrome://extensions/
-//~ 3. Add a background script
-//#file manifest.json L8
-"background": {
-    "service_worker": "service-worker.js",
-    "type": "module"
-}
-
+//~ STEP 3... Add a background script
+//#file L8 manifest.json
+    "background": {
+        "service_worker": "service-worker.js",
+        "type": "module"
+    },
 //#save
-//#file service-worker.js
+//~ Add the comma back in!
+//~ Create a new service worker
+//#newfile service-worker.js
 chrome.action.onClicked.addListener(tab => {
-//#P
+//-
     chrome.scripting.executeScript({
         target: {tabId: tab.id},
-//#P
+//-
         func: () => {
-//#P
+//-
             alert('Hello from my extension!');
         }
       });
   });
 //#save
-//#file manifest.json L12
-"action": { },
-//#P
-"permissions": [
-    "scripting"
-]
-//#save
-//~ Reload in chrome!
-//#chrome chrome://extensions/
-//~ Add a popup
-//#file OVERWRITE service-worker.js
-// chrome.action.onClicked.addListener(tab => {
-//     chrome.scripting.executeScript({
-//         target: {tabId: tab.id},
-//         func: () => {
-//             alert('Hello from my extension!');
-//         }
-//       });
-//   });
-//#save
-//#file index.html
-!
+//~ In order to get this chrome.actions event we ned to add a blank actions object into our manifest
+//#file L12 manifest.json
+    "action": { },
+//~ We also need to add the permissions to run a script
 
-//#moveto 6,12
-//replace "My Chrome Extension" > "Extension Title"
+    "permissions": [
+        "scripting"
+    ],
+//- And the permissions to access a page at any url
+    "host_permissions": [
+        "http://*/*",
+        "https://*/*"
+    ]
+//#save
+//~ Reload in chrome and go to example.com
+//~ STEP 4... Add a popup
+//#file service-worker.js
+//~ Clear all this out
+//#clearfile
+//#save
+//#newfile index.html
+//~ TYPE Exclamation then enter to boilerplate a new html file
+//#replace 6,12 "Document" > "Extension Title"
 //#moveto 9
-<h1>Hello!</h1>
-
+    <h1>Hello!</h1>
 //#save
-//#file manifest.json L12
-//#linedelete
-"action": {
-    "default_popup": "index.html"
-},
+//~ Now add this action into the manifest file
+//#file D12 manifest.json
+    "action": {
+        "default_popup": "index.html"
+    },
 
 //#save
 //~ Reload in chrome!
-//#chrome chrome://extensions/
-//~ 4. Adding a Script into the index.html
-//file index.html L12
-<button id="myButton">Click Me</button>
-//#P
-<script src="index.js"></script>
+//~ STEP 5... Adding a Script into the index.html
+//#file L10 index.html
+    <button id="myButton">Click Me</button>
+//-
+    <script src="index.js"></script>
 //#save
-//#file index.js
+//~ Then create that new index.js script file
+//#newfile index.js
 async function sayHello() {
-//#P    
+//-
     let [tab] = await chrome.tabs.query({ active: true });
-//#P
+//-
     chrome.scripting.executeScript({
-//#P        
+//-        
         target: { tabId: tab.id },
         func: () => {
-//#P            
+//-            
             alert('Hello from my extension!');
         }
     });
 }
-//#P
+//-
 document.getElementById("myButton").addEventListener("click", sayHello);
 //#save
 //~ Reload in chrome!
-//#chrome chrome://extensions/
