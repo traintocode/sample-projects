@@ -12,9 +12,10 @@ provider:
   environment:    
     OPENAI_KEY: ${env:OPENAI_KEY}
 
-
-
 functions:
   callchatgpt:
-    handler: handler.main
-    url: true
+    handler: handler.main    url: true
+
+
+
+
