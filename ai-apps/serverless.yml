@@ -15,7 +15,7 @@ provider:
 
 
 functions:
-  getjoke:
+  callchatgpt:
     handler: handler.main
     url: true
 
