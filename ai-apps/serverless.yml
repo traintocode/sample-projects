@@ -2,20 +2,19 @@ service: lambda-chatgpt
 plugins:
   - serverless-plugin-typescript
 useDotenv: true
-
 provider:
   name: aws
   runtime: nodejs18.x
   stackName: lambda-chatgpt
   region: eu-west-2
   versionFunctions: false
-  deploymentBucket: traintocode-backend-deployments
+  deploymentBucket: my-lambda-deployments
   environment:    
     OPENAI_KEY: ${env:OPENAI_KEY}
+
 
 
 functions:
   callchatgpt:
     handler: handler.main
     url: true
-
