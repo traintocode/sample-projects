@@ -1,0 +1,21 @@
+service: lambda-chatgpt
+plugins:
+  - serverless-plugin-typescript
+useDotenv: true
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  stackName: lambda-chatgpt
+  region: eu-west-2
+  versionFunctions: false
+  deploymentBucket: traintocode-backend-deployments
+  environment:    
+    OPENAI_KEY: ${env:OPENAI_KEY}
+
+
+functions:
+  getjoke:
+    handler: handler.main
+    url: true
+
