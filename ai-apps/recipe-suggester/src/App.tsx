@@ -1,35 +1,50 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [ foodItems, setFoodItems ] = useState<string[]>([]);
+  const [ itemInputValue, setItemInputValue ] = useState('');
+  const [ generatedRecipe, setGeneratedRecipe ] = useState('');
+  const [ isBusy, setIsBusy ] = useState(false);
 
-  return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+  const addFoodItem: React.FormEventHandler = (e) => {
+    e.preventDefault();
+    if (itemInputValue.length === 0) return;
+    setFoodItems([...foodItems, itemInputValue]);
+    setItemInputValue('');
+  }
+
+  const generate = async () => {
+    setIsBusy(true);
+    const response = await fetch('my-url.com', {
+      method: 'POST',
+      body: JSON.stringify({ foodItems })
+    });
+    setGeneratedRecipe(await response.text());
+    setIsBusy(false);
+  }
+
+  return <main>
+    <h1>AI Recipe Suggester</h1>
+    <p>Enter the food items you have available to generate a recipe!</p>
+    <ul>
+      {foodItems.map(item => <li key={item}>{item}</li>)}
+    </ul>
+    <form onSubmit={addFoodItem} className="vertical">
+      <input type="text" 
+            placeholder='New Food Item' 
+            value={itemInputValue} 
+            onChange={e => setItemInputValue(e.currentTarget.value)} 
+            />
+      <button type="submit">Add</button>
+    </form>
+    <div className="row">
+      <button disabled={isBusy} onClick={generate}>Generate Recipe!</button>
+    </div>
+    <article>
+      {generatedRecipe}
+    </article>
+  </main>
 }
 
 export default App
