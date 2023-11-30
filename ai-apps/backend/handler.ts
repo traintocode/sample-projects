@@ -1,12 +1,11 @@
 import { APIGatewayEvent, APIGatewayEventRequestContext, Context } from "aws-lambda";
 import OpenAI from "openai";
 
-
 const env = <{ OPENAI_KEY: string }>process.env;
+
 type RequestBody = {
     subject: string
 };
-
 
 export async function main(event: APIGatewayEvent, context: Context) {
     const body = <RequestBody>JSON.parse(event.body!);
@@ -30,7 +29,6 @@ export async function main(event: APIGatewayEvent, context: Context) {
 
     const result = gptResponse.choices[0].message.content;
 
-
     return {
         statusCode: 200,
         headers: {
@@ -38,6 +36,3 @@ export async function main(event: APIGatewayEvent, context: Context) {
         body: result
     };
 }
-
-
-

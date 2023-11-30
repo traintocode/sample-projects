@@ -1,7 +1,9 @@
 service: lambda-chatgpt
 plugins:
   - serverless-plugin-typescript
+
 useDotenv: true
+
 provider:
   name: aws
   runtime: nodejs18.x
@@ -10,12 +12,8 @@ provider:
   versionFunctions: false
   deploymentBucket: my-lambda-deployments
   environment:    
-    OPENAI_KEY: ${env:OPENAI_KEY}
-
 functions:
   callchatgpt:
-    handler: handler.main    url: true
-
-
-
-
+    handler: handler.main
+    url: true
+    OPENAI_KEY: ${env:OPENAI_KEY}
