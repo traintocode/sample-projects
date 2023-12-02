@@ -67,7 +67,7 @@ export async function main(event: APIGatewayEvent, context: Context) {
         function_call: { name: 'makeCorrections' }
     });
 
-    const args = <ReplacementsArgType>JSON.parse(
+    const args = <{ replacements: ReplacementsArgType[] }>JSON.parse(
             gptResponse.choices[0].message.function_call!.arguments);
 
     return {
@@ -75,6 +75,6 @@ export async function main(event: APIGatewayEvent, context: Context) {
         headers: {
             ["Access-Control-Allow-Origin"]: "http://localhost:5173"
         },
-        body: JSON.stringify(args)
+        body: JSON.stringify(args.replacements)
     };
 }
