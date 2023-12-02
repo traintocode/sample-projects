@@ -12,14 +12,14 @@ export default App
 
 //#typein L5 src/App.tsx
   const [ subject, setSubject ] = useState('');
-  const [ creativity, setCreativity ] = useState(80);
-  const [ isBusy, setIsBusy ] = useState(false);
+  const [ creativity, setCreativity ] = #INPUTPAUSE#useState(80);
+  const#INPUTPAUSE# [ isBusy, setIsBusy ] = useState(false);
 
   const submitForm: React.FormEventHandler = async (e) => {
     e.preventDefault();
     setIsBusy(true);
     // send to backend...
-    setIsBusy(false);
+    #INPUTPAUSE#setIsBusy(false);
   }
 
 
@@ -27,25 +27,25 @@ export default App
     <h1>AI Poetry Writer</h1>
     <form
       className="inputform"
-      onSubmit={submitForm}
+      #INPUTPAUSE#onSubmit={submitForm}
       >
-      <label htmlFor="subject">Subject</label>
+      <label htmlFor#INPUTPAUSE#="subject">Subject</label>
       <input type="text"
-        id="subject"
+        id#INPUTPAUSE#="subject"
         value={subject} 
         onChange={e => setSubject(e.currentTarget.value)} 
-        disabled={isBusy}
+        disabled#INPUTPAUSE#={isBusy}
       />
       <label htmlFor="creativity">Creativity</label>      
       <input type="range"
         id="creativity"
         value={creativity}
         onChange={e => setCreativity(e.currentTarget.valueAsNumber)}
-        min={10}
+        min=#INPUTPAUSE#{10}
         max={100}
         disabled={isBusy}
         />
-      <button type="submit" disabled={isBusy}>Create</button>
+      <button type#INPUTPAUSE#="submit" disabled={isBusy}>Create</button>
     </form>
 
 //#initialstate L1 src/App.css
@@ -53,15 +53,15 @@ export default App
 
 //#typein L1 src/App.css
 .inputform {
-  --control-spacing: 2em;
+  --control-spacing#INPUTPAUSE#: 2em;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
 }
-//#typein L8 src/App.css
-.inputform label {
+
+.inputform label#INPUTPAUSE# {
   flex: 1 1 30%;
-  margin-top: var(--control-spacing);
+  margin-top: var(#INPUTPAUSE#--control-spacing);
 }
 
 .inputform input {

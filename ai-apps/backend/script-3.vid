@@ -1,0 +1,127 @@
+//#initialstate L1 handler.ts
+import { APIGatewayEvent, APIGatewayEventRequestContext, Context } from "aws-lambda";
+import OpenAI from "openai";
+
+const env = <{ OPENAI_KEY: string }>process.env;
+
+type RequestBody = {
+    subject: string
+};
+
+export async function main(event: APIGatewayEvent, context: Context) {
+    const body = <RequestBody>JSON.parse(event.body!);
+    if (!body || !body.subject) return { 
+        statusCode: 400, 
+        body: JSON.stringify({ message: 'Invalid request' })
+    };
+    const openai = new OpenAI({ apiKey: env.OPENAI_KEY });
+
+    const prompt = `Tell me a joke about ${body.subject}`;
+
+    const gptResponse = await openai.chat.completions.create({
+        model: "gpt-3.5-turbo",
+        messages: [
+            {
+                role: "user",
+                content: prompt
+            }
+        ]
+    });
+
+    const result = gptResponse.choices[0].message.content;
+
+    return {
+        statusCode: 200,
+        headers: {
+        },
+        body: result
+    };
+}
+
+//#deletefrom L7 handler.ts
+//#typein L7 handler.ts
+    textToCheck: string
+
+//#replace L12C13 handler.ts
+?.textToCheck?.length) return { 
+//#replace L18C19 handler.ts
+"Correct the spelling and grammatical errors in the following text:\n\n";
+//#replace L25C31 handler.ts
+ + body.textToCheck
+//#deletefrom L27 handler.ts
+//#typein L27 handler.ts
+        ],
+        functions: [
+            {
+                name: "makeCorrections",
+                description: "Makes spelling or grammar corrections to a body of text",
+                parameters: {
+                    type: "object",
+                    properties: {
+                        replacements: {
+                            type: "array",
+                            description: "Array of corrections",
+                            items: {
+                                type: "object",
+                                properties: {
+                                    changeFrom: {
+                                        type: "string",
+                                        description: "The word or phrase to change"
+                                    },
+                                    changeTo: {
+                                        type: "string",
+                                        description: "The new word or phrase to replace it with"
+                                    },
+                                    reason: {
+                                        type: "string",
+                                        description: "The reason this change is being made",
+                                        enum: ["Grammar", "Spelling"]
+                                    }                                    
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        ],
+        function_call: { name: 'makeCorrections' }
+
+//#typein L10 handler.ts
+type ReplacementsArgType = {
+    changeFrom: string,
+    changeTo: string,
+    reason: "Grammar" | "Spelling"
+}[]
+
+
+//#replace L70C10 handler.ts
+args = <{ replacements: ReplacementsArgType[] }>JSON.parse(
+            gptResponse.choices[0].message.function_call!.arguments);
+//#replace L77C14 handler.ts
+JSON.stringify(args.replacements)
+//#typein L76 handler.ts
+            ["Access-Control-Allow-Origin"]: "http://localhost:5173"
+
+//#initialstate L1 serverless.yml
+service: ai-app-backend
+plugins:
+  - serverless-plugin-typescript
+
+useDotenv: true
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  stackName: ai-app-backend
+  region: eu-west-2
+  versionFunctions: false
+  deploymentBucket: ${env:DEPLOY_BUCKET}
+  environment:    
+    OPENAI_KEY: ${env:OPENAI_KEY}
+functions:
+  callchatgpt:
+    handler: handler.main
+    url: true
+
+//#typein L20 serverless.yml
+    timeout: 120
