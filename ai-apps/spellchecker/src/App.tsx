@@ -18,10 +18,10 @@ function App() {
     const response = await fetch('https://ibk7ftff62hk5yg4rqdmksui340vbwhp.lambda-url.eu-west-2.on.aws/', {
       method: 'POST',
       body: JSON.stringify({ textToCheck })
-  });
+    });
     setResults(await response.json() as ReplacementsArgType[]);
     setIsBusy(false);
-}
+  }
 
 
   return <main>
@@ -37,7 +37,8 @@ function App() {
           onChange={e => setTextToCheck(e.currentTarget.value)}
           disabled={isBusy}
         />
-      <button type="submit">Check</button>
+        { !isBusy && 
+      <button type="submit">Check</button> }
     </form>
     <table className="results">
       <thead>
