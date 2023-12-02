@@ -33,6 +33,7 @@ export async function main(event: APIGatewayEvent, context: Context) {
     return {
         statusCode: 200,
         headers: {
+            ["Access-Control-Allow-Origin"]: "http://localhost:5173"
         },
         body: result
     };
@@ -99,9 +100,6 @@ args = <{ replacements: ReplacementsArgType[] }>JSON.parse(
             gptResponse.choices[0].message.function_call!.arguments);
 //#replace L77C14 handler.ts
 JSON.stringify(args.replacements)
-//#typein L76 handler.ts
-            ["Access-Control-Allow-Origin"]: "http://localhost:5173"
-
 //#initialstate L1 serverless.yml
 service: ai-app-backend
 plugins:

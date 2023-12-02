@@ -33,6 +33,7 @@ export async function main(event: APIGatewayEvent, context: Context) {
     return {
         statusCode: 200,
         headers: {
+            ["Access-Control-Allow-Origin"]: "http://localhost:5173"
         },
         body: result
     };
@@ -59,3 +60,27 @@ body.model || "gpt-3.5-turbo",
 poemPrompt
 //#typein L27 handler.ts
         temperature: body.temperature,
+
+//#initialstate L1 serverless.yml
+service: ai-app-backend
+plugins:
+  - serverless-plugin-typescript
+
+useDotenv: true
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  stackName: ai-app-backend
+  region: eu-west-2
+  versionFunctions: false
+  deploymentBucket: ${env:DEPLOY_BUCKET}
+  environment:    
+    OPENAI_KEY: ${env:OPENAI_KEY}
+functions:
+  callchatgpt:
+    handler: handler.main
+    url: true
+
+//#typein L20 serverless.yml
+    timeout: 120
