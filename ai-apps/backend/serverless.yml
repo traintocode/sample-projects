@@ -1,4 +1,4 @@
-service: lambda-chatgpt
+service: ai-app-backend
 plugins:
   - serverless-plugin-typescript
 
@@ -7,13 +7,13 @@ useDotenv: true
 provider:
   name: aws
   runtime: nodejs18.x
-  stackName: lambda-chatgpt
+  stackName: ai-app-backend
   region: eu-west-2
   versionFunctions: false
-  deploymentBucket: my-lambda-deployments
+  deploymentBucket: ${env:DEPLOY_BUCKET}
   environment:    
+    OPENAI_KEY: ${env:OPENAI_KEY}
 functions:
   callchatgpt:
     handler: handler.main
     url: true
-    OPENAI_KEY: ${env:OPENAI_KEY}
