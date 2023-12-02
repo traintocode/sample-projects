@@ -9,3 +9,66 @@ function App() {
 }
 
 export default App
+
+//#typein L5 src/App.tsx
+  const [ subject, setSubject ] = useState('');
+  const [ creativity, setCreativity ] = useState(80);
+  const [ isBusy, setIsBusy ] = useState(false);
+
+  const submitForm: React.FormEventHandler = async (e) => {
+    e.preventDefault();
+    setIsBusy(true);
+    // send to backend...
+    setIsBusy(false);
+  }
+
+
+//#typein L17 src/App.tsx
+    <h1>AI Poetry Writer</h1>
+    <form
+      className="inputform"
+      onSubmit={submitForm}
+      >
+      <label htmlFor="subject">Subject</label>
+      <input type="text"
+        id="subject"
+        value={subject} 
+        onChange={e => setSubject(e.currentTarget.value)} 
+        disabled={isBusy}
+      />
+      <label htmlFor="creativity">Creativity</label>      
+      <input type="range"
+        id="creativity"
+        value={creativity}
+        onChange={e => setCreativity(e.currentTarget.valueAsNumber)}
+        min={10}
+        max={100}
+        disabled={isBusy}
+        />
+      <button type="submit" disabled={isBusy}>Create</button>
+    </form>
+
+//#initialstate L1 src/App.css
+
+
+//#typein L1 src/App.css
+.inputform {
+  --control-spacing: 2em;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+//#typein L8 src/App.css
+.inputform label {
+  flex: 1 1 30%;
+  margin-top: var(--control-spacing);
+}
+
+.inputform input {
+  flex: 1 1 70%;
+}
+
+.inputform button {
+  flex: 1 1 100%;
+  margin-top: var(--control-spacing);
+}
