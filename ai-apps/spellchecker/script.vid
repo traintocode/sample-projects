@@ -1,0 +1,62 @@
+//#initialstate L1 src/App.tsx
+import { useState } from 'react'
+import './App.css'
+
+function App() {
+  return <main>
+
+  </main>
+}
+
+export default App
+
+//#deletefrom L6 src/App.tsx
+//#typein L6 src/App.tsx
+    <h1>Pirate Chat Bot</h1>
+    <div>
+      #INPUTPAUSE#<p className="message ai">Hello there how arrrrr you?</p>
+      #INPUTPAUSE#<p className="message user">I'm great</p>
+    </div>
+    <#INPUTPAUSE#form
+      className="vertical"
+      >
+      <input type="text"
+        placeholder='New Message'
+      />
+      #INPUTPAUSE#<button type="submit">Send</button>
+    </form>
+
+//#initialstate L1 src/App.css
+
+
+//#typein L1 src/App.css
+.message {
+
+}
+
+.message.ai {
+
+}
+
+.message.user {
+
+}
+
+form#INPUTPAUSE#.vertical {
+  display: flex;
+  justify-content: space-between;
+}
+
+//#typein L2 src/App.css
+  border-radius: 5px;
+  padding: 0.5em;
+
+//#deletefrom L8 src/App.css
+//#typein L8 src/App.css
+  background-color: darkslategrey;
+  margin-right: 2em;
+
+//#deletefrom L13 src/App.css
+//#typein L13 src/App.css
+  background-color: darkolivegreen;
+  margin-left: 2em;
