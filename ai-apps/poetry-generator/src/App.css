@@ -19,3 +19,7 @@
   margin-top: var(--control-spacing);
 }
 
+.poem {
+  font-family: cursive;
+  font-style: italic;
+}

@@ -72,3 +72,39 @@ export default App
   flex: 1 1 100%;
   margin-top: var(--control-spacing);
 }
+//#typein L4 src/App.tsx
+type RequestBody = {
+  subject: string,
+  temperature?: number,
+  model?: "gpt-3.5-turbo" | "gpt-4"
+};
+
+
+//#typein L14 src/App.tsx
+  const [ poem, setPoem ] = useState('');
+
+//#deletefrom L47 src/App.tsx
+//#typein L47 src/App.tsx
+    <pre className="poem">
+      {poem}
+    </pre>
+
+//#typein L21 src/App.css
+
+.poem {
+  font-family: cursive;
+  font-style: italic;
+}
+
+//#deletefrom L19 src/App.tsx
+//#typein L19 src/App.tsx
+    const body: RequestBody = {
+      subject,
+      temperature: creativity / 100,
+      model: creativity > 0.8 ? 'gpt-4' : 'gpt-3.5-turbo'
+    };
+    const response = await fetch('https://ibk7ftff62hk5yg4rqdmksui340vbwhp.lambda-url.eu-west-2.on.aws/', {
+      method: 'POST',
+      body: JSON.stringify(body)
+    });
+    setPoem(await response.text());
