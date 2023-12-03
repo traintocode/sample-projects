@@ -1,12 +1,6 @@
 import { useState } from 'react'
 import './App.css'
 
-type RequestBody = {
-  subject: string,
-  temperature?: number,
-  model?: "gpt-3.5-turbo" | "gpt-4"
-};
-
 function App() {
   const [ subject, setSubject ] = useState('');
   const [ isBusy, setIsBusy ] = useState(false);
@@ -38,7 +32,7 @@ function App() {
       />
       <button type="submit" disabled={isBusy}>Create</button>
     </form>
-    <img src={imageUrl} />
+    <img src={imageUrl} className="generated-image" />
   </main>
 }
 

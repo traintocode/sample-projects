@@ -22,7 +22,6 @@ export async function main(event: APIGatewayEvent, context: Context) {
         model: "dall-e-3",
         response_format: "url"
     });
-
     const result = gptResponse.data[0].url;
 
     return {

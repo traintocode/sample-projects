@@ -38,3 +38,26 @@ export async function main(event: APIGatewayEvent, context: Context) {
         body: result
     };
 }
+
+//#replace L18C20 handler.ts
+Create a cartoon image of ${body.subject}`;
+//#deletefrom L20 handler.ts
+//#deletefrom L20 handler.ts
+//#deletefrom L20 handler.ts
+//#deletefrom L20 handler.ts
+//#deletefrom L20 handler.ts
+//#deletefrom L20 handler.ts
+//#deletefrom L20 handler.ts
+//#deletefrom L20 handler.ts
+//#deletefrom L20 handler.ts
+//#deletefrom L20 handler.ts
+//#deletefrom L20 handler.ts
+//#typein L20 handler.ts
+    const gptResponse = await openai.images.generate({
+        prompt,
+        model: "dall-e-3",
+        response_format: "url"
+    });
+
+//#typein L25 handler.ts
+    const result = gptResponse.data[0].url;
