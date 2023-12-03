@@ -1,0 +1,14 @@
+.inputform {
+  display: flex;
+  flex-direction: column;
+}
+
+.inputform label {
+}
+
+.inputform input {
+}
+
+.inputform button {
+  margin-top: var(--control-spacing);
+}

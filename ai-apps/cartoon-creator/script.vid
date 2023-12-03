@@ -1,0 +1,16 @@
+//#initialstate L1 src/App.tsx
+import { useState } from 'react'
+import './App.css'
+
+function App() {
+  return <main>
+
+  </main>
+}
+
+export default App
+
+
+//#initialstate L1 src/App.css
+
+
