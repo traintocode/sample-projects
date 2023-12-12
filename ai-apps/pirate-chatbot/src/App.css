@@ -1,0 +1,21 @@
+.message {
+  border-radius: 5px;
+  padding: 0.5em;
+
+}
+
+.message.ai {
+  background-color: darkslategrey;
+  margin-right: 2em;
+}
+
+.message.user {
+  background-color: darkolivegreen;
+  margin-left: 2em;
+}
+
+form.vertical {
+  display: flex;
+  justify-content: space-between;
+}
+

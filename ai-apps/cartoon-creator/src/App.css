@@ -1,0 +1,10 @@
+.inputform {
+  display: flex;
+  flex-direction: column;
+}
+
+.inputform > *,
+.generated-image {
+  margin-top: 1em;
+}
+

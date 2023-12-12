@@ -1,0 +1,62 @@
+//#initialstate L1 src/App.tsx
+import { useState } from 'react'
+import './App.css'
+
+function App() {
+  return <main>
+
+  </main>
+}
+
+export default App
+
+//#typein L5 src/App.tsx
+  const [ subject, setSubject ] = useState('');
+  const [ isBusy, setIsBusy ] = useState(false);
+  const [ imageUrl, setImageUrl ] = useState('');
+
+  const submitForm: React.FormEventHandler = async (e) => {
+    e.preventDefault();
+    setIsBusy(false);
+  }
+
+
+//#deletefrom L15 src/App.tsx
+//#typein L15 src/App.tsx
+    <h1>Cartoon Image Generator</h1>
+    <form
+      className="inputform"
+      onSubmit={submitForm}
+      >
+      <label htmlFor="subject">Subject</label>
+      <input type="text"
+        id="subject"
+        value={subject} 
+        onChange={e => setSubject(e.currentTarget.value)} 
+        disabled={isBusy}
+      />
+      <button type="submit" disabled={isBusy}>Create</button>
+    </form>
+    <img src={imageUrl} className="generated-image" />
+
+//#initialstate L1 src/App.css
+
+
+//#typein L1 src/App.css
+.inputform {
+  display: flex;
+  flex-direction: column;
+}
+
+.inputform > *,
+.generated-image {
+  margin-top: 1em;
+}
+
+//#typein L11 src/App.tsx
+    setIsBusy(true);
+    const response = await fetch('https://ibk7ftff62hk5yg4rqdmksui340vbwhp.lambda-url.eu-west-2.on.aws/', {
+      method: 'POST',
+      body: JSON.stringify({ subject })
+    });
+    setImageUrl(await response.text());

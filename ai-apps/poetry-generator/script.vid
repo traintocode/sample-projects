@@ -1,0 +1,110 @@
+//#initialstate L1 src/App.tsx
+import { useState } from 'react'
+import './App.css'
+
+function App() {
+  return <main>
+
+  </main>
+}
+
+export default App
+
+//#typein L5 src/App.tsx
+  const [ subject, setSubject ] = useState('');
+  const [ creativity, setCreativity ] = #INPUTPAUSE#useState(80);
+  const#INPUTPAUSE# [ isBusy, setIsBusy ] = useState(false);
+
+  const submitForm: React.FormEventHandler = async (e) => {
+    e.preventDefault();
+    setIsBusy(true);
+    // send to backend...
+    #INPUTPAUSE#setIsBusy(false);
+  }
+
+
+//#typein L17 src/App.tsx
+    <h1>AI Poetry Writer</h1>
+    <form
+      className="inputform"
+      #INPUTPAUSE#onSubmit={submitForm}
+      >
+      <label htmlFor#INPUTPAUSE#="subject">Subject</label>
+      <input type="text"
+        id#INPUTPAUSE#="subject"
+        value={subject} 
+        onChange={e => setSubject(e.currentTarget.value)} 
+        disabled#INPUTPAUSE#={isBusy}
+      />
+      <label htmlFor="creativity">Creativity</label>      
+      <input type="range"
+        id="creativity"
+        value={creativity}
+        onChange={e => setCreativity(e.currentTarget.valueAsNumber)}
+        min=#INPUTPAUSE#{10}
+        max={100}
+        disabled={isBusy}
+        />
+      <button type#INPUTPAUSE#="submit" disabled={isBusy}>Create</button>
+    </form>
+
+//#initialstate L1 src/App.css
+
+
+//#typein L1 src/App.css
+.inputform {
+  --control-spacing#INPUTPAUSE#: 2em;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.inputform label#INPUTPAUSE# {
+  flex: 1 1 30%;
+  margin-top: var(#INPUTPAUSE#--control-spacing);
+}
+
+.inputform input {
+  flex: 1 1 70%;
+}
+
+.inputform button {
+  flex: 1 1 100%;
+  margin-top: var(--control-spacing);
+}
+//#typein L4 src/App.tsx
+type RequestBody = {
+  subject: string,
+  temperature?: number,
+  model?: "gpt-3.5-turbo" | "gpt-4"
+};
+
+
+//#typein L14 src/App.tsx
+  const [ poem, setPoem ] = useState('');
+
+//#deletefrom L47 src/App.tsx
+//#typein L47 src/App.tsx
+    <pre className="poem">
+      {poem}
+    </pre>
+
+//#typein L21 src/App.css
+
+.poem {
+  font-family: cursive;
+  font-style: italic;
+}
+
+//#deletefrom L19 src/App.tsx
+//#typein L19 src/App.tsx
+    const body: RequestBody = {
+      subject,
+      temperature: creativity / 100,
+      model: creativity > 0.8 ? 'gpt-4' : 'gpt-3.5-turbo'
+    };
+    const response = await fetch('https://ibk7ftff62hk5yg4rqdmksui340vbwhp.lambda-url.eu-west-2.on.aws/', {
+      method: 'POST',
+      body: JSON.stringify(body)
+    });
+    setPoem(await response.text());

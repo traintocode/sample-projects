@@ -1,0 +1,23 @@
+.inputbox {
+  font-family: inherit;
+  padding: 0.5em;
+}
+
+form.vertical {
+  display: flex;
+  flex-direction: column;
+}
+
+form.vertical button {
+  margin-top: 1em;
+}
+
+.results {
+    margin-top: 1em;
+    width: 100%;
+}
+
+.results th {
+  text-align: left;
+  color: grey;
+}

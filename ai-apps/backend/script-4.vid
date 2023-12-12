@@ -1,0 +1,86 @@
+//#initialstate L1 handler.ts
+import { APIGatewayEvent, APIGatewayEventRequestContext, Context } from "aws-lambda";
+import OpenAI from "openai";
+
+const env = <{ OPENAI_KEY: string }>process.env;
+
+type RequestBody = {
+    subject: string
+};
+
+export async function main(event: APIGatewayEvent, context: Context) {
+    const body = <RequestBody>JSON.parse(event.body!);
+    if (!body || !body.subject) return { 
+        statusCode: 400, 
+        body: JSON.stringify({ message: 'Invalid request' })
+    };
+    const openai = new OpenAI({ apiKey: env.OPENAI_KEY });
+
+    const prompt = `Tell me a joke about ${body.subject}`;
+
+    const gptResponse = await openai.chat.completions.create({
+        model: "gpt-3.5-turbo",
+        messages: [
+            {
+                role: "user",
+                content: prompt
+            }
+        ]
+    });
+
+    const result = gptResponse.choices[0].message.content;
+
+    return {
+        statusCode: 200,
+        headers: {
+            ["Access-Control-Allow-Origin"]: "http://localhost:5173"
+        },
+        body: result
+    };
+}
+
+//#deletefrom L7 handler.ts
+//#typein L7 handler.ts
+    subject: string,
+    temperature?: number,
+    model?: "gpt-3.5-turbo" | "gpt-4"
+
+//#replace L14C13 handler.ts
+?.subject?.length) return { 
+//#deletefrom L20 handler.ts
+//#typein L20 handler.ts
+    const poemPrompt = `Write me a poem about ${body.subject}.  
+    The poem should be cheerful and include rhyme, alliteration, metaphors, or similes to add depth to the poem.
+    Keep it to about 100 words.
+    Respond with just the poem.`
+
+//#replace L26C15 handler.ts
+body.model || "gpt-3.5-turbo",
+//#replace L30C25 handler.ts
+poemPrompt
+//#typein L27 handler.ts
+        temperature: body.temperature,
+
+//#initialstate L1 serverless.yml
+service: ai-app-backend
+plugins:
+  - serverless-plugin-typescript
+
+useDotenv: true
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  stackName: ai-app-backend
+  region: eu-west-2
+  versionFunctions: false
+  deploymentBucket: ${env:DEPLOY_BUCKET}
+  environment:    
+    OPENAI_KEY: ${env:OPENAI_KEY}
+functions:
+  callchatgpt:
+    handler: handler.main
+    url: true
+
+//#typein L20 serverless.yml
+    timeout: 120

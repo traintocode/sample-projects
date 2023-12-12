@@ -1,0 +1,25 @@
+.inputform {
+  --control-spacing: 2em;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.inputform label {
+  flex: 1 1 30%;
+  margin-top: var(--control-spacing);
+}
+
+.inputform input {
+  flex: 1 1 70%;
+}
+
+.inputform button {
+  flex: 1 1 100%;
+  margin-top: var(--control-spacing);
+}
+
+.poem {
+  font-family: cursive;
+  font-style: italic;
+}

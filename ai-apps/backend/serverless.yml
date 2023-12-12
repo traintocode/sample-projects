@@ -1,0 +1,20 @@
+service: ai-app-backend
+plugins:
+  - serverless-plugin-typescript
+
+useDotenv: true
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  stackName: ai-app-backend
+  region: eu-west-2
+  versionFunctions: false
+  deploymentBucket: ${env:DEPLOY_BUCKET}
+  environment:    
+    OPENAI_KEY: ${env:OPENAI_KEY}
+functions:
+  callchatgpt:
+    handler: handler.main
+    url: true
+    timeout: 120

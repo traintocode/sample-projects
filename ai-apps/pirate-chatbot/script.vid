@@ -1,0 +1,114 @@
+//#initialstate L1 src/App.tsx
+import { useState } from 'react'
+import './App.css'
+
+function App() {
+  return <main>
+
+  </main>
+}
+
+export default App
+
+//#deletefrom L6 src/App.tsx
+//#typein L6 src/App.tsx
+    <h1>Pirate Chat Bot</h1>
+    <div>
+      #INPUTPAUSE#<p className="message ai">Hello there how arrrrr you?</p>
+      #INPUTPAUSE#<p className="message user">I'm great</p>
+    </div>
+    <#INPUTPAUSE#form
+      className="vertical"
+      >
+      <input type="text"
+        placeholder='New Message'
+      />
+      #INPUTPAUSE#<button type="submit">Send</button>
+    </form>
+
+//#initialstate L1 src/App.css
+
+
+//#typein L1 src/App.css
+.message {
+
+}
+
+.message.ai {
+
+}
+
+.message.user {
+
+}
+
+form#INPUTPAUSE#.vertical {
+  display: flex;
+  justify-content: space-between;
+}
+
+//#typein L2 src/App.css
+  border-radius: 5px;
+  padding: 0.5em;
+
+//#deletefrom L8 src/App.css
+//#typein L8 src/App.css
+  background-color: darkslategrey;
+  margin-right: 2em;
+
+//#deletefrom L13 src/App.css
+//#typein L13 src/App.css
+  background-color: darkolivegreen;
+  margin-left: 2em;
+
+//#typein L4 src/App.tsx
+type Message = {
+  text: string,
+  from: 'ai' | 'user'
+};
+
+
+//#typein L10 src/App.tsx
+  const [ messages, setMessages ] = useState<Message[]>([]);
+  const [ newInputValue, setNewInputValue ] = useState('');
+  const [ isBusy, setIsBusy ] = useState(false);
+
+
+//#typein L14 src/App.tsx
+  const newMessage: React.FormEventHandler = async (e) => {
+    e.preventDefault();
+    setIsBusy(true);
+    setNewInputValue('');
+    const newMessages: Message[] = [...messages, {
+      text: newInputValue,
+      from: 'user'
+    }];
+    setMessages(newMessages);
+    const response = await fetch('https://ibk7ftff62hk5yg4rqdmksui340vbwhp.lambda-url.eu-west-2.on.aws/', {
+      method: 'POST',
+      body: JSON.stringify({ messages: newMessages })
+    });
+    setMessages([...newMessages, {
+      from: 'ai',
+      text: await response.text()
+    }]);
+    setIsBusy(false);
+  }
+
+
+//#typein L42 src/App.tsx
+      onSubmit={newMessage}
+
+//#typein L45 src/App.tsx
+        value={newInputValue} 
+        onChange={e => setNewInputValue(e.currentTarget.value)} 
+
+//#deletefrom L37 src/App.tsx
+//#deletefrom L37 src/App.tsx
+//#typein L37 src/App.tsx
+      {messages.map((message, index) => <p key={index} className={"message " + message.from}>
+        {message.text}
+      </p>)}
+
+//#replace L50C27 src/App.tsx
+ disabled={isBusy}>Send</button>

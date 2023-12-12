@@ -1,0 +1,8 @@
+form.vertical {
+    display: flex;
+    justify-content: space-between;
+}
+
+main .row {
+    margin-top: 2rem;
+}
