@@ -1,0 +1,45 @@
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--spacing-m);
+  text-align: center;
+}
+
+.header {
+  margin-bottom: var(--spacing-l);
+}
+
+.header h1 {
+  font-size: 2.5em;
+  color: var(--color-text-primary);
+}
+
+.mainContent {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-l);
+}
+
+.colorInputSection,
+.paletteDisplaySection {
+  padding: var(--spacing-m);
+  border: 1px solid var(--color-border-primary);
+  background-color: var(--color-background-secondary);
+}
+
+.colorInputSection h2,
+.paletteDisplaySection h2 {
+  margin-top: 0;
+  margin-bottom: var(--spacing-m);
+  font-size: 1.8em;
+  color: var(--color-text-secondary);
+}
+
+.footer {
+  margin-top: var(--spacing-xl);
+  padding-top: var(--spacing-m);
+  border-top: 1px solid var(--color-border-primary);
+  font-size: 0.9em;
+  color: var(--color-text-footer);
+}
